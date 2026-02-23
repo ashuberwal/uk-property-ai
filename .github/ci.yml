@@ -1,0 +1,27 @@
+name: CI Pipeline - Docker Build Test
+
+# 1. When should this robot wake up?
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# 2. What jobs should the robot do?
+jobs:
+  test-build:
+    runs-on: ubuntu-latest # It spins up a temporary Linux cloud server
+
+    steps:
+      # Step A: Download your code into the temporary server
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      # Step B: Try to build the Docker container
+      - name: 🐳 Test Docker Build
+        run: |
+          echo "Testing if the Docker container builds successfully..."
+          docker build -t uk-property-api:test .
+          echo "Docker build successful! The code is safe."
