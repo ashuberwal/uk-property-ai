@@ -1,0 +1,23 @@
+name: CI Pipeline - Docker Build Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🐳 Test Docker Build
+        run: |
+          echo "Testing if the Docker container builds successfully..."
+          docker build -t uk-property-api:test .
+          echo "Docker build successful! The code is safe."
